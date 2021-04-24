@@ -10,8 +10,8 @@
 [![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com)
 [![Chat](https://img.shields.io/badge/chat-discussions-success.svg)](https://github.com/AlexRogalskiy/github-action-node-dependency/discussions)
 
-[![DeepSource](https://deepsource.io/gh/AlexRogalskiy/github-action-node-dependency.svg/?label=active+issues\&show_trend=true)](https://deepsource.io/gh/AlexRogalskiy/github-action-node-dependency/?ref=repository-badge)
-[![DeepScan grade](https://deepscan.io/api/teams/11946/projects/16314/branches/347248/badge/grade.svg)](https://deepscan.io/dashboard#view=project\&tid=11946\&pid=16314\&bid=347248)
+[![DeepSource](https://deepsource.io/gh/AlexRogalskiy/github-action-node-dependency.svg/?label=active+issues&show_trend=true)](https://deepsource.io/gh/AlexRogalskiy/github-action-node-dependency/?ref=repository-badge)
+[![DeepScan grade](https://deepscan.io/api/teams/11946/projects/16856/branches/369224/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=11946&pid=16856&bid=369224)
 
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/AlexRogalskiy/github-action-node-dependency)
 ![GitHub Release Date](https://img.shields.io/github/release-date/AlexRogalskiy/github-action-node-dependency)
@@ -31,10 +31,10 @@
 [![dependencies Status](https://status.david-dm.org/gh/AlexRogalskiy/github-action-node-dependency.svg)](https://david-dm.org/AlexRogalskiy/github-action-node-dependency)
 [![devDependencies Status](https://status.david-dm.org/gh/AlexRogalskiy/github-action-node-dependency.svg)](https://david-dm.org/AlexRogalskiy/github-action-node-dependency?type=dev)
 
-[![codebeat badge](https://codebeat.co/badges/47a2e243-2741-4164-afb5-b24cbdd5843d)](https://codebeat.co/projects/github-com-alexrogalskiy-quotes-master)
+[![codebeat badge](https://codebeat.co/badges/81e098cc-02c8-432f-a6af-3a010a71e3e5)](https://codebeat.co/projects/github-com-alexrogalskiy-github-action-node-dependency-master)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/AlexRogalskiy/github-action-node-dependency.svg?logo=lgtm\&logoWidth=18)](https://lgtm.com/projects/g/AlexRogalskiy/github-action-node-dependency/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/AlexRogalskiy/github-action-node-dependency.svg?logo=lgtm\&logoWidth=18)](https://lgtm.com/projects/g/AlexRogalskiy/github-action-node-dependency/context:javascript)
-[![codecov](https://codecov.io/gh/AlexRogalskiy/github-action-node-dependency/branch/main/graph/badge.svg?token=qzbb9pz8x3)](https://codecov.io/gh/AlexRogalskiy/github-action-node-dependency)
+[![codecov](https://codecov.io/gh/AlexRogalskiy/github-action-node-dependency/branch/master/graph/badge.svg?token=w5FKdWT4pV)](https://codecov.io/gh/AlexRogalskiy/github-action-node-dependency)
 [![CI](https://github.com/AlexRogalskiy/github-action-node-dependency/workflows/CI/badge.svg)](https://github.com/AlexRogalskiy/github-action-node-dependency/actions/workflows/build.yml)
 [![CircleCI](https://circleci.com/gh/AlexRogalskiy/github-action-node-dependency.svg?style=shield)](https://circleci.com/gh/AlexRogalskiy/github-action-node-dependency)
 [![GitHub Super-Linter](https://github.com/AlexRogalskiy/github-action-node-dependency/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)

@@ -5,7 +5,7 @@ import { ExecCallback } from '../../typings/domain-types'
 
 import { errorLogs, logs } from './loggers'
 
-const DEFAULT_EXEC_CALLBACK = (error: Optional<ExecException>, stdout: string, stderr: string) => {
+const DEFAULT_EXEC_CALLBACK = (error: Optional<ExecException>, stdout: string, stderr: string): void => {
     error ? errorLogs(stderr) : logs(stdout)
 }
 

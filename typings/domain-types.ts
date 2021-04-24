@@ -51,7 +51,7 @@ export type ConfigOptions = {
     /**
      * Operation mode
      */
-    readonly mode: OperationMode
+    readonly operation: OperationMode
 }
 //--------------------------------------------------------------------------------------------------
 /**
@@ -74,10 +74,6 @@ export type CommandOptions = {
  * @desc Type representing resource options
  */
 export type ResourceOptions = {
-    /**
-     * Source file
-     */
-    readonly sourceFile: string
     /**
      * Target file
      */

@@ -51,7 +51,6 @@
 
 - [*Description*](#description)
 - [*Inputs*](#inputs)
-  - [`sourceData`](#sourcedata)
   - [`reportName`](#reportname)
   - [`sourceFilePath`](#sourcefilepath)
   - [`targetFilePath`](#targetfilepath)
@@ -89,43 +88,38 @@ Provides node dependency reports by input parameters.
 
 ## *Inputs*
 
-### `reportName`
+### `mode`
 
-**Optional** Report name
+**Required** Operation mode (`package_versions` / `multi_package_versions`)
 
-### `sourceFilePath`
+### `reportFile`
 
-**Optional** Source file path
+**Optional** Target report file name
 
-### `targetFilePath`
+### `reportPath`
 
-**Optional** Target file path
-
-### `sizeUnit`
-
-**Optional** File size units (any of b|kb|mb|gb|tb|pb)
+**Optional** Target report file path
 
 ## *Outputs*
 
-### `fileReport`
+### `reportStatus`
 
-JSON representation of files size report
+Report representation status
 
 ## *Examples*
 
 ```yml
-- name: File size
+- name: Node dependency report
   uses: alexrogalskiy/github-action-node-dependency@master
   with:
-    reportName: 'Proverbs File Diff'
-    sourceFilePath: './data/african_proverbs.json'
-    targetFilePath: './data/african_proverbs_unique.json'
-    sizeUnit: 'kb'
+    mode: 'package_versions'
+    reportFile: 'report.json'
+    reportPath: './data'
 ```
 
 Running locally:
 
-- `npm run start:action --action github-action-node-dependency --reportName 'Proverbs File Diff' --sourceFilePath './data/african_proverbs.json' --targetFilePath './data/african_proverbs_unique.json' --sizeUnit 'kb'`
+- `npm run start:action --action github-action-node-dependency --mode 'package_versions' --reportFile 'report.json' --reportPath './data'`
 
 ## *Visitor stats*
 

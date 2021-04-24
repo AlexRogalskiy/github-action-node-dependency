@@ -3,14 +3,14 @@ description: 'Automatically generates node dependency reports by provided parame
 author: 'AlexRogalskiy'
 
 inputs:
-  sourceFile:
-    description: 'Source file'
+  mode:
+    description: 'Operation mode (package_versions / multi_package_versions)'
     required: true
-  targetFile:
-    description: 'Target file'
+  reportFile:
+    description: 'Target report file name'
     required: false
-  targetPath:
-    description: 'Target path'
+  reportPath:
+    description: 'Target report file path'
     required: false
 
 outputs:

@@ -8,7 +8,7 @@ import { OperationStatus } from '../../typings/enum-types'
 
 import { storeDataAsJson } from '../utils/files'
 import { execCommand } from '../utils/processes'
-import { deserialize } from '../utils/serializers'
+import { deserialize, serialize } from '../utils/serializers'
 import { toString } from '../utils/commons'
 
 import { boxenLogs, errorLogs } from '../utils/loggers'
@@ -47,30 +47,30 @@ const execCallback = (options: ConfigOptions) => (
                 $pathToMultiVersionPackages()
             `)(tree)
 
+    const { targetFile, targetPath } = options.resourceOptions
     const versions = packageVersions(packages)
 
-    storeDataAsJson(options.resourceOptions.targetPath, options.resourceOptions.targetFile, versions)
+    storeDataAsJson(targetPath, targetFile, versions)
 }
 
 const packageVersions = (pkg: any, level = ''): string[] => {
-    const value =
-        level +
-        pkg.name +
-        '@' +
-        pkg.version +
-        (pkg.otherVersions.length ? ` [more versions: ${pkg.otherVersions.join(', ')}]` : '')
+    const value = `${level + pkg.name}@${pkg.version}${
+        pkg.otherVersions.length > 0 ? `[${pkg.otherVersions.join(', ')}]` : ''
+    }`
     const result = [value]
 
-    level = level.replace('└─ ', '   ').replace('├─ ', '│  ')
-    pkg.dependencies
-        .map((dep, idx, arr) => packageVersions(dep, level + (idx === arr.length - 1 ? '└─ ' : '├─ ')))
-        .forEach(v => result.push(v))
+    level = level.replace('└─ ', '').replace('├─ ', '')
+    const deps = pkg.dependencies.map(value => packageVersions(value, level))
+
+    for (const item of deps) {
+        result.push(item)
+    }
 
     return result
 }
 
-export default async function getPackageVersionsOperation(options: ConfigOptions): Promise<OperationStatus> {
-    boxenLogs(`Executing dependency versions operation with options: ${options}`)
+export default async function multiPackageVersionsOperation(options: ConfigOptions): Promise<OperationStatus> {
+    boxenLogs(`Executing multi package versions operation with options: ${serialize(options)}`)
 
     try {
         const { command, args } = options.commandOptions
@@ -78,7 +78,7 @@ export default async function getPackageVersionsOperation(options: ConfigOptions
 
         await execCommandAsync(expression, profile.execOptions, execCallback(options))
 
-        return Promise.reject(OperationStatus.success)
+        return Promise.resolve(OperationStatus.success)
     } catch (error) {
         errorLogs(error.message)
 

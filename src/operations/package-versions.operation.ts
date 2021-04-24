@@ -7,7 +7,7 @@ import { OperationStatus } from '../../typings/enum-types'
 import { toString } from '../utils/commons'
 import { storeDataAsJson } from '../utils/files'
 import { execCommand } from '../utils/processes'
-import { deserialize } from '../utils/serializers'
+import { deserialize, serialize } from '../utils/serializers'
 
 import { boxenLogs, errorLogs } from '../utils/loggers'
 import { profile } from '../utils/profiles'
@@ -35,34 +35,29 @@ const execCallback = (options: ConfigOptions) => (
 
     for (const key in multipleVersionPackages) {
         if (Object.prototype.hasOwnProperty.call(multipleVersionPackages, key)) {
-            if (multipleVersionPackages[key].size === 1) {
-                delete multipleVersionPackages[key]
-            } else {
-                multipleVersionPackages[key] = [...multipleVersionPackages[key]].sort()
-            }
+            multipleVersionPackages[key] = [...multipleVersionPackages[key]].sort((a, b) => a - b)
         }
     }
 
-    const depsPathsToMultipleVersionPackages = processTree(tree, '', multipleVersionPackages)
+    const { targetFile, targetPath } = options.resourceOptions
+    const packages = processTree(tree, '', multipleVersionPackages)
+    const versions = packageVersions(packages)
 
-    const versions = packageVersions(depsPathsToMultipleVersionPackages)
-
-    storeDataAsJson(options.resourceOptions.targetPath, options.resourceOptions.targetFile, versions)
+    storeDataAsJson(targetPath, targetFile, versions)
 }
 
 const packageVersions = (pkg: any, level = ''): string[] => {
-    const value =
-        level +
-        pkg.name +
-        '@' +
-        pkg.version +
-        (pkg.otherVersions.length ? ` [more versions: ${pkg.otherVersions.join(', ')}]` : '')
+    const value = `${level + pkg.name}@${pkg.version}${
+        pkg.otherVersions.length > 0 ? `[${pkg.otherVersions.join(', ')}]` : ''
+    }`
     const result = [value]
 
-    level = level.replace('└─ ', '   ').replace('├─ ', '│  ')
-    pkg.dependencies
-        .map((dep, idx, arr) => packageVersions(dep, level + (idx === arr.length - 1 ? '└─ ' : '├─ ')))
-        .forEach(v => result.push(v))
+    level = level.replace('└─ ', '').replace('├─ ', '')
+    const deps = pkg.dependencies.map(value => packageVersions(value, level))
+
+    for (const item of deps) {
+        result.push(item)
+    }
 
     return result
 }
@@ -97,7 +92,7 @@ const processTree = (pkg: any, name: string, map: any = {}): Optional<PackageInf
         }
     }
 
-    if (pkgName in map || deps.length) {
+    if (pkgName in map || deps.length > 0) {
         return {
             name: pkgName,
             version: pkg.version,
@@ -109,8 +104,8 @@ const processTree = (pkg: any, name: string, map: any = {}): Optional<PackageInf
     return null
 }
 
-export default async function getPackageVersionsOperation(options: ConfigOptions): Promise<OperationStatus> {
-    boxenLogs(`Executing dependency versions operation with options: ${options}`)
+export default async function packageVersionsOperation(options: ConfigOptions): Promise<OperationStatus> {
+    boxenLogs(`Executing package versions operation with options: ${serialize(options)}`)
 
     try {
         const { command, args } = options.commandOptions
@@ -118,7 +113,7 @@ export default async function getPackageVersionsOperation(options: ConfigOptions
 
         execCommand(expression, profile.execOptions, execCallback(options))
 
-        return Promise.reject(OperationStatus.success)
+        return Promise.resolve(OperationStatus.success)
     } catch (error) {
         errorLogs(error.message)
 

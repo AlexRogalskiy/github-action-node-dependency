@@ -86,10 +86,9 @@ jobs:
 
       - uses: ./
         with:
-          reportName: 'Proverbs File Diff'
-          sourceFilePath: './data/african_proverbs.json'
-          targetFilePath: './data/african_proverbs_unique.json'
-          sizeUnit: 'kb'
+          mode: 'package_versions'
+          reportFile: 'report.json'
+          reportPath: './data'
 
       - name: Push changes
         uses: stefanzweifel/git-auto-commit-action@v4

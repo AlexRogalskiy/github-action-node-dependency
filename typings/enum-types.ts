@@ -14,7 +14,8 @@ export enum Profile {
  * @desc Type representing supported operation modes
  */
 export enum OperationMode {
-    package_versions = 'dependency-versions',
+    package_versions = 'package-dependency-versions',
+    multi_package_versions = 'multi-package-dependency-versions',
 }
 
 //--------------------------------------------------------------------------------------------------

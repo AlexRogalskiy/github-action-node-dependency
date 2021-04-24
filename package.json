@@ -29,7 +29,7 @@
         "precommit": "npm run lint:staged",
         "postinstall": "husky install",
         "prebuild": "del-cli dist coverage",
-        "build": "ncc build src/index.ts -m -o dist",
+        "build": "ncc build src/index.ts -o dist",
         "package": "ncc build src/index.ts --source-map --license licenses.txt",
         "reinstall": "del-cli --dot=true ./node_modules ./package-lock.json ./yarn.lock",
         "version": "git add -A dist",

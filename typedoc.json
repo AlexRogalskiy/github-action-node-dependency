@@ -1,0 +1,16 @@
+{
+    "name": "GitHub action for NPM Dependency Reports",
+    "entryPoints": ["./src", "./typings"],
+    "externalPattern": ["./data"],
+    "exclude": [
+        "**/__tests__/**/*",
+        "**/__test_utils__/**/*",
+        "**/__fixtures__/**/*",
+        "**/*+(.spec|.e2e).ts"
+    ],
+    "excludeExternals": true,
+    "hideGenerator": true,
+    "readme": "README.md",
+    "highlightTheme": "dark-plus",
+    "out": "docs"
+}

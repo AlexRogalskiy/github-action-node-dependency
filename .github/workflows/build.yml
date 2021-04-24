@@ -1,0 +1,98 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+      - 'releases/*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      max-parallel: 2
+      matrix:
+        node-version:
+          - 10.x
+          - 11.x
+          - 12.x
+          - 14.x
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v1.2.1
+        with:
+          version: 4.11.1
+
+      - name: Install Dependencies
+        run: pnpm i
+
+      - name: Build project
+        run: |
+          pnpm run build --if-present
+
+      - name: Run tests
+        run: |
+          pnpm run test:all --if-present
+
+      - name: Check
+        run: |
+          pnpm run check:all --if-present
+
+      - name: Circular dependency check
+        uses: gerrit0/circular-dependency-check@v1
+        with:
+          entry: dist/index.js
+
+      - name: coverage
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          name: actions ${{ matrix.node-version }}
+          file: ./coverage/coverage-final.json
+          fail_ci_if_error: true
+          verbose: true
+
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Dependencies
+        run: npm run all
+
+      - uses: ./
+        with:
+          reportName: 'Proverbs File Diff'
+          sourceFilePath: './data/african_proverbs.json'
+          targetFilePath: './data/african_proverbs_unique.json'
+          sizeUnit: 'kb'
+
+      - name: Push changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Add images pulled from headless browser to folder
+          commit_options: '--no-verify --signoff'

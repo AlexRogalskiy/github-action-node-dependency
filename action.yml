@@ -1,0 +1,27 @@
+name: 'Node Dependency'
+description: 'Automatically generates node dependency reports by provided parameters'
+author: 'AlexRogalskiy'
+
+inputs:
+  sourceFile:
+    description: 'Source file'
+    required: true
+  targetFile:
+    description: 'Target file'
+    required: false
+  targetPath:
+    description: 'Target path'
+    required: false
+
+outputs:
+  reportStatus:
+    description: 'Report representation status'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+
+# Ref: https://haya14busa.github.io/github-action-brandings/
+branding:
+  icon: 'file'
+  color: 'orange'

@@ -1,0 +1,15 @@
+/.circleci
+/.dependabot
+/.github
+/.husky
+/docs
+/node_modules
+
+.git/
+coverage/
+logs/
+build/
+.vscode/
+
+*Dockerfile
+*.log

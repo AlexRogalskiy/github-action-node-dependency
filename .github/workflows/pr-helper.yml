@@ -1,0 +1,40 @@
+name: PR Merge on Schedule
+
+on:
+  pull_request:
+    branches:
+      - master
+  pull_request_review:
+    branches:
+      - master
+  issue_comment:
+    branches:
+      - master
+
+jobs:
+  prhelper_schedule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run PR Helper on Schedule
+        id: runprhelperonschedule
+        uses: Matticusau/pr-helper@v1.2.4
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          enable-prmerge-automation: true
+          enable-prcomment-automation: true
+          enable-prlabel-automation: true
+          enable-prreviewer-frontmatter: false
+          enable-welcomemessage: true
+          prmerge-deletebranch: 'true'
+          prmerge-deletebranch-config: ''
+          prmerge-pathcheck: true
+          prmerge-allowpaths: '{"any":["src/**"]}'
+          welcome-message: "Thanks for opening an issue! Make sure you've followed CONTRIBUTING.md."
+          prmerge-requireallchecks: true
+          prmerge-requirereviewcount: 1
+          prmerge-method: 'merge'
+          prlabel-default: 'pr-onhold'
+          prlabel-ready: 'pr-ready'
+          prlabel-onhold: 'pr-onhold'
+          prlabel-reviewrequired: 'review-required'
+          prlabel-automerge: 'auto-merge'

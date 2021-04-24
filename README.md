@@ -10,8 +10,8 @@
 [![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com)
 [![Chat](https://img.shields.io/badge/chat-discussions-success.svg)](https://github.com/AlexRogalskiy/github-action-node-dependency/discussions)
 
-[![DeepSource](https://deepsource.io/gh/AlexRogalskiy/github-action-node-dependency.svg/?label=active+issues&show_trend=true)](https://deepsource.io/gh/AlexRogalskiy/github-action-node-dependency/?ref=repository-badge)
-[![DeepScan grade](https://deepscan.io/api/teams/11946/projects/16856/branches/369224/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=11946&pid=16856&bid=369224)
+[![DeepSource](https://deepsource.io/gh/AlexRogalskiy/github-action-node-dependency.svg/?label=active+issues\&show_trend=true)](https://deepsource.io/gh/AlexRogalskiy/github-action-node-dependency/?ref=repository-badge)
+[![DeepScan grade](https://deepscan.io/api/teams/11946/projects/16856/branches/369224/badge/grade.svg)](https://deepscan.io/dashboard#view=project\&tid=11946\&pid=16856\&bid=369224)
 
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/AlexRogalskiy/github-action-node-dependency)
 ![GitHub Release Date](https://img.shields.io/github/release-date/AlexRogalskiy/github-action-node-dependency)
@@ -51,12 +51,11 @@
 
 - [*Description*](#description)
 - [*Inputs*](#inputs)
-  - [`reportName`](#reportname)
-  - [`sourceFilePath`](#sourcefilepath)
-  - [`targetFilePath`](#targetfilepath)
-  - [`sizeUnit`](#sizeunit)
+  - [`mode`](#mode)
+  - [`reportFile`](#reportfile)
+  - [`reportPath`](#reportpath)
 - [*Outputs*](#outputs)
-  - [`fileReport`](#filereport)
+  - [`reportStatus`](#reportstatus)
 - [*Examples*](#examples)
 - [*Visitor stats*](#visitor-stats)
 - [*Licensing*](#licensing)

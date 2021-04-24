@@ -69,7 +69,9 @@ const packageVersions = (pkg: any, level = ''): string[] => {
     return result
 }
 
-export default async function multiPackageVersionsOperation(options: ConfigOptions): Promise<OperationStatus> {
+export default async function multiPackageVersionsOperation(
+    options: ConfigOptions
+): Promise<OperationStatus> {
     boxenLogs(`Executing multi package versions operation with options: ${serialize(options)}`)
 
     try {

@@ -25871,7 +25871,7 @@ const getProperty = (property, options) => {
 
 
 const buildConfigOptions = () => {
-    const mode = 'package_versions' || 0;
+    const mode = getRequiredProperty('mode');
     const targetFile = getProperty('targetFile') || profile.reportOptions.reportFile;
     const targetPath = getProperty('targetPath') || profile.reportOptions.reportPath;
     const commandOptions = profile.commandOptions;

@@ -16,6 +16,24 @@ import { profile } from '../utils/profiles'
 
 import { valueError } from '../errors/value.error'
 
+const packageVersions = (pkg: any, level = '', skipSelf = true): any => {
+    const result = {}
+    const value = `${pkg.version.toString()}${
+        pkg.otherVersions.length > 0 ? `[${pkg.otherVersions.join(', ')}]` : ''
+    }`
+
+    result[`${level + pkg.name}`] = skipSelf ? [] : [value]
+
+    const nodeLevel = level.replace('└─ ', '').replace('├─ ', '')
+    const deps = pkg.dependencies.map(value => packageVersions(value, nodeLevel, false))
+
+    for (const item of deps) {
+        result[`${level + pkg.name}`].push(item)
+    }
+
+    return result
+}
+
 const execCommandAsync = promisify<string, ExecOptions, ExecCallback, ChildProcess>(execCommand)
 
 const execCallback = (options: ConfigOptions) => (
@@ -51,22 +69,6 @@ const execCallback = (options: ConfigOptions) => (
     const versions = packageVersions(packages)
 
     storeDataAsJson(targetPath, targetFile, versions)
-}
-
-const packageVersions = (pkg: any, level = ''): string[] => {
-    const value = `${level + pkg.name}@${pkg.version}${
-        pkg.otherVersions.length > 0 ? `[${pkg.otherVersions.join(', ')}]` : ''
-    }`
-    const result = [value]
-
-    level = level.replace('└─ ', '').replace('├─ ', '')
-    const deps = pkg.dependencies.map(value => packageVersions(value, level))
-
-    for (const item of deps) {
-        result.push(item)
-    }
-
-    return result
 }
 
 export default async function multiPackageVersionsOperation(

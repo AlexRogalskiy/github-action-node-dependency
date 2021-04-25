@@ -46,17 +46,19 @@ const execCallback = (options: ConfigOptions) => (
     storeDataAsJson(targetPath, targetFile, versions)
 }
 
-const packageVersions = (pkg: any, level = ''): string[] => {
-    const value = `${level + pkg.name}@${pkg.version}${
+const packageVersions = (pkg: any, level = '', skipSelf = true): any => {
+    const result = {}
+    const value = `${pkg.version.toString()}${
         pkg.otherVersions.length > 0 ? `[${pkg.otherVersions.join(', ')}]` : ''
     }`
-    const result = [value]
 
-    level = level.replace('└─ ', '').replace('├─ ', '')
-    const deps = pkg.dependencies.map(value => packageVersions(value, level))
+    result[`${level + pkg.name}`] = skipSelf ? [] : [value]
+
+    const nodeLevel = level.replace('└─ ', '').replace('├─ ', '')
+    const deps = pkg.dependencies.map(value => packageVersions(value, nodeLevel, false))
 
     for (const item of deps) {
-        result.push(item)
+        result[`${level + pkg.name}`].push(item)
     }
 
     return result

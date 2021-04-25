@@ -25690,13 +25690,14 @@ const execCallback = (options) => (error, stdout, stderr) => {
     const versions = packageVersions(packages);
     storeDataAsJson(targetPath, targetFile, versions);
 };
-const packageVersions = (pkg, level = '') => {
-    const value = `${level + pkg.name}@${pkg.version}${pkg.otherVersions.length > 0 ? `[${pkg.otherVersions.join(', ')}]` : ''}`;
-    const result = [value];
-    level = level.replace('└─ ', '').replace('├─ ', '');
-    const deps = pkg.dependencies.map(value => packageVersions(value, level));
+const packageVersions = (pkg, level = '', skipSelf = true) => {
+    const result = {};
+    const value = `${pkg.version.toString()}${pkg.otherVersions.length > 0 ? `[${pkg.otherVersions.join(', ')}]` : ''}`;
+    result[`${level + pkg.name}`] = skipSelf ? [] : [value];
+    const nodeLevel = level.replace('└─ ', '').replace('├─ ', '');
+    const deps = pkg.dependencies.map(value => packageVersions(value, nodeLevel, false));
     for (const item of deps) {
-        result.push(item);
+        result[`${level + pkg.name}`].push(item);
     }
     return result;
 };
@@ -25765,6 +25766,17 @@ const external_util_namespaceObject = require("util");;
 
 
 
+const multi_package_versions_operation_packageVersions = (pkg, level = '', skipSelf = true) => {
+    const result = {};
+    const value = `${pkg.version.toString()}${pkg.otherVersions.length > 0 ? `[${pkg.otherVersions.join(', ')}]` : ''}`;
+    result[`${level + pkg.name}`] = skipSelf ? [] : [value];
+    const nodeLevel = level.replace('└─ ', '').replace('├─ ', '');
+    const deps = pkg.dependencies.map(value => multi_package_versions_operation_packageVersions(value, nodeLevel, false));
+    for (const item of deps) {
+        result[`${level + pkg.name}`].push(item);
+    }
+    return result;
+};
 const execCommandAsync = (0,external_util_namespaceObject.promisify)(execCommand);
 const multi_package_versions_operation_execCallback = (options) => (error, stdout, stderr) => {
     if (error) {
@@ -25791,16 +25803,6 @@ const multi_package_versions_operation_execCallback = (options) => (error, stdou
     const { targetFile, targetPath } = options.resourceOptions;
     const versions = multi_package_versions_operation_packageVersions(packages);
     storeDataAsJson(targetPath, targetFile, versions);
-};
-const multi_package_versions_operation_packageVersions = (pkg, level = '') => {
-    const value = `${level + pkg.name}@${pkg.version}${pkg.otherVersions.length > 0 ? `[${pkg.otherVersions.join(', ')}]` : ''}`;
-    const result = [value];
-    level = level.replace('└─ ', '').replace('├─ ', '');
-    const deps = pkg.dependencies.map(value => multi_package_versions_operation_packageVersions(value, level));
-    for (const item of deps) {
-        result.push(item);
-    }
-    return result;
 };
 async function multiPackageVersionsOperation(options) {
     boxenLogs(`Executing multi package versions operation with options: ${serialize(options)}`);

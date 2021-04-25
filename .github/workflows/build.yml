@@ -77,6 +77,8 @@ jobs:
 
       - name: Setup Node.js
         uses: actions/setup-node@v2.1.4
+        with:
+          node-version: 12.x
 
       - name: Install Dependencies
         run: npm install

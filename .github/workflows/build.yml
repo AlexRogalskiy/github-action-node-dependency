@@ -52,6 +52,15 @@ jobs:
         run: |
           pnpm run check:all --if-present
 
+      - name: Coveralls
+        uses: coverallsapp/github-action@v1.1.0
+        env:
+          NODE_COVERALLS_DEBUG: 1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          parallel: true
+          flag-name: run-${{ matrix.node-version }}
+
       - name: Circular dependency check
         uses: gerrit0/circular-dependency-check@v1
         with:
@@ -65,6 +74,16 @@ jobs:
           file: ./coverage/coverage-final.json
           fail_ci_if_error: true
           verbose: true
+
+  finish:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@v1.1.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          parallel-finished: true
 
   test:
     runs-on: ubuntu-latest

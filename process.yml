@@ -1,0 +1,10 @@
+apps:
+  - script: dist/index.js
+    name: main
+    instances: 1
+    max_memory_restart: 300M
+    error_file: logs/index.log
+    out_file: logs/index.log
+    env:
+      NODE_ENV: production
+      DEBUG: 'bp*'

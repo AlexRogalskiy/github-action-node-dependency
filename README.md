@@ -31,6 +31,7 @@
 [![dependencies Status](https://status.david-dm.org/gh/AlexRogalskiy/github-action-node-dependency.svg)](https://david-dm.org/AlexRogalskiy/github-action-node-dependency)
 [![devDependencies Status](https://status.david-dm.org/gh/AlexRogalskiy/github-action-node-dependency.svg)](https://david-dm.org/AlexRogalskiy/github-action-node-dependency?type=dev)
 
+[![Coverage Status](https://coveralls.io/repos/github/AlexRogalskiy/github-action-node-dependency/badge.svg?branch=master)](https://coveralls.io/github/AlexRogalskiy/github-action-node-dependency?branch=master)
 [![codebeat badge](https://codebeat.co/badges/81e098cc-02c8-432f-a6af-3a010a71e3e5)](https://codebeat.co/projects/github-com-alexrogalskiy-github-action-node-dependency-master)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/AlexRogalskiy/github-action-node-dependency.svg?logo=lgtm\&logoWidth=18)](https://lgtm.com/projects/g/AlexRogalskiy/github-action-node-dependency/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/AlexRogalskiy/github-action-node-dependency.svg?logo=lgtm\&logoWidth=18)](https://lgtm.com/projects/g/AlexRogalskiy/github-action-node-dependency/context:javascript)

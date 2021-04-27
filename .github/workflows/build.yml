@@ -21,7 +21,6 @@ jobs:
           - 11.x
           - 12.x
           - 14.x
-
     steps:
       - uses: actions/checkout@v2
         with:
@@ -53,7 +52,8 @@ jobs:
           pnpm run check:all --if-present
 
       - name: Coveralls
-        uses: coverallsapp/github-action@v1.1.0
+        uses: coverallsapp/github-action@master
+        if: hashFiles('./coverage/lcov.info') != ''
         env:
           NODE_COVERALLS_DEBUG: 1
         with:
@@ -75,20 +75,9 @@ jobs:
           fail_ci_if_error: true
           verbose: true
 
-  finish:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Coveralls Finished
-        uses: coverallsapp/github-action@v1.1.0
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          parallel-finished: true
-
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-
     steps:
       - uses: actions/checkout@v2
         with:
@@ -116,3 +105,14 @@ jobs:
         with:
           commit_message: Add images pulled from headless browser to folder
           commit_options: '--no-verify --signoff'
+
+  finish:
+    needs: test
+    runs-on: ubuntu-latest
+    if: hashFiles('./coverage/lcov.info') != ''
+    steps:
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@v1.1.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          parallel-finished: true

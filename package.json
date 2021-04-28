@@ -83,7 +83,7 @@
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-prettier": "^3.1.4",
         "eslint-plugin-spellcheck": "0.0.8",
-        "eslint-plugin-unicorn": "^17.2.0",
+        "eslint-plugin-unicorn": "31.0.0",
         "expect": "^26.6.2",
         "folio": "^0.3.18",
         "git-cz": "^4.1.0",

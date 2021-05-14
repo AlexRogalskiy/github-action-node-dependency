@@ -105,7 +105,7 @@
         "ts-jest": "^26.4.4",
         "ts-node": ">=9.0.0",
         "typedoc": "^0.20.28",
-        "typescript": "^4.1.3"
+        "typescript": "4.4.0-dev.20210514"
     },
     "repository": {
         "type": "git",

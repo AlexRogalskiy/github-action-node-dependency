@@ -27,6 +27,7 @@
         "commit": "git-cz",
         "postpublish": "npm run clean",
         "precommit": "npm run lint:staged",
+        "preinstall": "npx npm-force-resolutions",
         "postinstall": "husky install",
         "prebuild": "del-cli dist coverage",
         "build": "ncc build src/index.ts -o dist",

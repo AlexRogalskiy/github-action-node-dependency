@@ -22,7 +22,10 @@
         "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
         "markdown": "markdown-link-check ./README.md ./SECURITY.md",
         "remark": "remark -q -f .",
-        "docs": "typedoc",
+        "docs": "rimraf docs && npm run docs:html",
+        "docs:html": "typedoc --tsconfig tsconfig.json --out docs/html/ --theme minimal --excludePrivate --plugin none",
+        "docs:md": "typedoc --tsconfig tsconfig.json --out docs/md/ --theme markdown --excludePrivate --mdHideSources --mdEngine github",
+        "build-image": "docker build -f Dockerfile --tag github-action-npm-dependency .",
         "semantic-release": "semantic-release",
         "commit": "git-cz",
         "postpublish": "npm run clean",
@@ -49,7 +52,7 @@
     "dependencies": {
         "@actions/core": "^1.2.6",
         "env-cmd": "^10.1.0",
-        "jora": "*",
+        "jora": "^1.0.0-beta.5",
         "lodash": "^4.17.20"
     },
     "devDependencies": {
@@ -105,7 +108,8 @@
         "semantic-release": ">=17.2.3",
         "ts-jest": "^26.4.4",
         "ts-node": ">=9.0.0",
-        "typedoc": "^0.20.28",
+        "typedoc": "^0.20.36",
+        "typedoc-plugin-markdown": "^1.2.1",
         "typescript": "^4.1.3"
     },
     "repository": {

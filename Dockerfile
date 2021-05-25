@@ -14,13 +14,13 @@ ARG BUILD_DATE="$(git rev-parse --short HEAD)"
 ARG HOME_DIR="/usr/src/app"
 
 ## Setting metadata
-LABEL version=$VERSION
-LABEL vcs-ref=$VCS_REF
-LABEL build-date=$BUILD_DATE
+LABEL "com.github.actions.repository"="https://github.com/AlexRogalskiy/github-action-node-dependency"
+LABEL "com.github.actions.homepage"="https://github.com/AlexRogalskiy/github-action-node-dependency"
+LABEL "com.github.actions.maintainer"="Nullables, Inc. <hello@nullables.io> (https://nullables.io)"
 
-LABEL repository="https://github.com/AlexRogalskiy/github-action-node-dependency"
-LABEL homepage="https://github.com/AlexRogalskiy/github-action-node-dependency"
-LABEL maintainer="Nullables, Inc. <hello@nullables.io> (https://nullables.io)"
+LABEL "com.github.actions.version"="$VERSION"
+LABEL "com.github.actions.build-date"="$BUILD_DATE"
+LABEL "com.github.actions.vcs-ref"="$VCS_REF"
 
 LABEL "com.github.actions.name"="GitHub action for npm dependencies"
 LABEL "com.github.actions.description"="Automatically generates npm dependency reports by provided parameters"
@@ -41,7 +41,7 @@ WORKDIR $APP_DIR
 ## Copying project sources
 COPY dist/index.js .
 
-COPY package*.json ./
+COPY package.json .
 
 ## Installing project dependencies
 RUN npm install

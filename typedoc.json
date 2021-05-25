@@ -10,6 +10,7 @@
     ],
     "excludeExternals": true,
     "hideGenerator": true,
+    "includeVersion": true,
     "readme": "README.md",
     "highlightTheme": "dark-plus",
     "out": "docs"

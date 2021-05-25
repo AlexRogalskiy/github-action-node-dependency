@@ -76,7 +76,7 @@
         "cz-conventional-changelog": "^3.3.0",
         "dateformat": "^4.5.1",
         "del-cli": "^3.0.1",
-        "editorconfig-checker": "3.3.0",
+        "editorconfig-checker": "4.0.2",
         "eslint": "^7.19.0",
         "eslint-config-prettier": "^6.15.0",
         "eslint-import-resolver-typescript": "^2.0.0",

@@ -71,7 +71,7 @@
         "@typescript-eslint/typescript-estree": "^4.17.0",
         "@vercel/ncc": "~>0.27.0",
         "boxen": "^5.0.0",
-        "conventional-changelog-cli": "^2.0.0",
+        "conventional-changelog-cli": "^3.0.0",
         "coveralls": "^3.1.0",
         "cz-conventional-changelog": "^3.3.0",
         "dateformat": "^4.5.1",

@@ -27,7 +27,7 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2.1.4
+        uses: actions/setup-node@v3.8.1
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -84,7 +84,7 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2.1.4
+        uses: actions/setup-node@v3.8.1
         with:
           node-version: 12.x
 

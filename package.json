@@ -75,7 +75,7 @@
         "coveralls": "^3.1.0",
         "cz-conventional-changelog": "^3.3.0",
         "dateformat": "^4.5.1",
-        "del-cli": "^3.0.1",
+        "del-cli": "^6.0.0",
         "editorconfig-checker": "3.3.0",
         "eslint": "^7.19.0",
         "eslint-config-prettier": "^6.15.0",
